@@ -26,10 +26,10 @@
     "Apache-2.0"
   ],
   "require": {
-    "php": ">=7.1",
+    "php": ">=5.4.0",
     "ext-json": "*",
     "guzzlehttp/guzzle": "~6.3",
-    "nesbot/carbon": "^1.0|^2.0",
+    "nesbot/carbon": "^1.0",
     "google/apiclient": "~2.0",
     "robrichards/xmlseclibs": "^2.0|^3.0"
   },
