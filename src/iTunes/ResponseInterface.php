@@ -64,44 +64,44 @@ interface ResponseInterface extends EnvironmentResponseInterface
      */
     const RESULT_RECEIPT_WITHOUT_PURCHASE = 21010;
 
-    public function getResultCode(): int;
+    public function getResultCode();
 
-    public function setResultCode(int $code): void;
+    public function setResultCode(int $code);
 
     /**
      * @return PurchaseItem[]
      */
     public function getPurchases();
 
-    public function getReceipt(): array;
+    public function getReceipt();
 
     /**
      * @return PurchaseItem[]
      */
     public function getLatestReceiptInfo();
 
-    public function getLatestReceipt(): ?string;
+    public function getLatestReceipt();
 
-    public function getBundleId(): string;
+    public function getBundleId();
 
-    public function getAppItemId(): string;
+    public function getAppItemId();
 
-    public function getOriginalPurchaseDate(): ?Carbon;
+    public function getOriginalPurchaseDate();
 
-    public function getRequestDate(): ?Carbon;
+    public function getRequestDate();
 
-    public function getReceiptCreationDate(): ?Carbon;
+    public function getReceiptCreationDate();
 
     /**
      * @return PendingRenewalInfo[]
      */
     public function getPendingRenewalInfo();
 
-    public function getRawData(): ?array;
+    public function getRawData();
 
-    public function isValid(): bool;
+    public function isValid();
 
-    public function isRetryable(): bool;
+    public function isRetryable();
 
     public function parseData();
 }

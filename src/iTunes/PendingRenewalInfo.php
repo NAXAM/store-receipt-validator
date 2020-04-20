@@ -119,7 +119,7 @@ class PendingRenewalInfo implements ArrayAccess
      *
      * @throws RunTimeException
      */
-    public function __construct(?array $data = null)
+    public function __construct($data)
     {
         $this->raw_data = $data;
         $this->parseData();
@@ -132,7 +132,7 @@ class PendingRenewalInfo implements ArrayAccess
 
      * @return $this
      */
-    public function parseData(): self
+    public function parseData()
     {
         if (!is_array($this->raw_data)) {
             throw new RunTimeException('Response must be a scalar value');
@@ -164,7 +164,7 @@ class PendingRenewalInfo implements ArrayAccess
      * Product ID
      * @return string
      */
-    public function getProductId(): string
+    public function getProductId()
     {
         return $this->product_id;
     }
@@ -173,7 +173,7 @@ class PendingRenewalInfo implements ArrayAccess
      * Auto Renew Product ID
      * @return string
      */
-    public function getAutoRenewProductId(): string
+    public function getAutoRenewProductId()
     {
         return $this->auto_renew_product_id;
     }
@@ -182,7 +182,7 @@ class PendingRenewalInfo implements ArrayAccess
      * Auto Renew Status Code
      * @return bool
      */
-    public function getAutoRenewStatus(): bool
+    public function getAutoRenewStatus()
     {
         return $this->auto_renew_status;
     }
@@ -191,7 +191,7 @@ class PendingRenewalInfo implements ArrayAccess
      * Original Transaction ID
      * @return string
      */
-    public function getOriginalTransactionId(): string
+    public function getOriginalTransactionId()
     {
         return $this->original_transaction_id;
     }
@@ -200,7 +200,7 @@ class PendingRenewalInfo implements ArrayAccess
      * Expiration Intent Code
      * @return int|null
      */
-    public function getExpirationIntent(): ?int
+    public function getExpirationIntent()
     {
         return $this->expiration_intent;
     }
@@ -209,7 +209,7 @@ class PendingRenewalInfo implements ArrayAccess
      * Is In Billing Retry Period Code
      * @return int|null
      */
-    public function isInBillingRetryPeriod(): ?int
+    public function isInBillingRetryPeriod()
     {
         return $this->is_in_billing_retry_period;
     }
@@ -226,7 +226,7 @@ class PendingRenewalInfo implements ArrayAccess
      *
      * @return string|null
      */
-    public function getStatus(): ?string
+    public function getStatus()
     {
         // Active when no expiration intent
         if (null === $this->expiration_intent) {
@@ -250,7 +250,7 @@ class PendingRenewalInfo implements ArrayAccess
      * Grace Period Expires Date
      * @return Carbon
      */
-    public function getGracePeriodExpiresDate(): ?Carbon
+    public function getGracePeriodExpiresDate()
     {
         return $this->grace_period_expires_date;
     }

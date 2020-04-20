@@ -53,8 +53,13 @@ class Acknowledger
      *
      * @return bool
      */
-    public function acknowledge(string $type = self::SUBSCRIPTION, string $developerPayload = '')
+    public function acknowledge(string $type, string $developerPayload)
     {
+        if (!$type) {
+            $type = Acknowledger::SUBSCRIPTION;
+        }
+    
+
         try {
             switch ($type) {
                 case self::SUBSCRIPTION:

@@ -4,12 +4,12 @@ namespace ReceiptValidator\iTunes;
 
 class SandboxResponse extends AbstractResponse implements ResponseInterface
 {
-    public function isProduction(): bool
+    public function isProduction()
     {
         return false;
     }
 
-    public function isSandbox(): bool
+    public function isSandbox()
     {
         return true;
     }

@@ -100,7 +100,7 @@ abstract class AbstractResponse
      * @param array|null $data
      * @throws RunTimeException
      */
-    public function __construct(?array $data = null)
+    public function __construct($data)
     {
         $this->raw_data = $data;
         $this->parseData();
@@ -111,7 +111,7 @@ abstract class AbstractResponse
      *
      * @return int
      */
-    public function getResultCode(): int
+    public function getResultCode()
     {
         return $this->result_code;
     }
@@ -122,7 +122,7 @@ abstract class AbstractResponse
      * @param int $code
      * @return self
      */
-    public function setResultCode(int $code): void
+    public function setResultCode(int $code)
     {
         $this->result_code = $code;
     }
@@ -142,7 +142,7 @@ abstract class AbstractResponse
      *
      * @return array
      */
-    public function getReceipt(): array
+    public function getReceipt()
     {
         return $this->receipt;
     }
@@ -162,7 +162,7 @@ abstract class AbstractResponse
      *
      * @return null|string
      */
-    public function getLatestReceipt(): ?string
+    public function getLatestReceipt()
     {
         return $this->latest_receipt;
     }
@@ -172,7 +172,7 @@ abstract class AbstractResponse
      *
      * @return string
      */
-    public function getBundleId(): string
+    public function getBundleId()
     {
         return $this->bundle_id;
     }
@@ -182,7 +182,7 @@ abstract class AbstractResponse
      *
      * @return string
      */
-    public function getAppItemId(): string
+    public function getAppItemId()
     {
         return $this->app_item_id;
     }
@@ -190,7 +190,7 @@ abstract class AbstractResponse
     /**
      * @return Carbon|null
      */
-    public function getOriginalPurchaseDate(): ?Carbon
+    public function getOriginalPurchaseDate()
     {
         return $this->original_purchase_date;
     }
@@ -198,7 +198,7 @@ abstract class AbstractResponse
     /**
      * @return Carbon|null
      */
-    public function getRequestDate(): ?Carbon
+    public function getRequestDate()
     {
         return $this->request_date;
     }
@@ -206,7 +206,7 @@ abstract class AbstractResponse
     /**
      * @return Carbon|null
      */
-    public function getReceiptCreationDate(): ?Carbon
+    public function getReceiptCreationDate()
     {
         return $this->receipt_creation_date;
     }
@@ -226,7 +226,7 @@ abstract class AbstractResponse
      *
      * @return array
      */
-    public function getRawData(): ?array
+    public function getRawData()
     {
         return $this->raw_data;
     }
@@ -236,7 +236,7 @@ abstract class AbstractResponse
      *
      * @return boolean
      */
-    public function isValid(): bool
+    public function isValid()
     {
         return $this->result_code === ResponseInterface::RESULT_OK
             || $this->result_code === ResponseInterface::RESULT_RECEIPT_VALID_BUT_SUB_EXPIRED;
@@ -247,7 +247,7 @@ abstract class AbstractResponse
      *
      * @return boolean
      */
-    public function isRetryable(): bool
+    public function isRetryable()
     {
         return $this->is_retryable;
     }
@@ -258,7 +258,7 @@ abstract class AbstractResponse
      * @return $this
      * @throws RunTimeException
      */
-    public function parseData(): self
+    public function parseData()
     {
         if (!is_array($this->raw_data)) {
             throw new RuntimeException('Response must be an array');
@@ -282,7 +282,7 @@ abstract class AbstractResponse
         return $this;
     }
 
-    protected function isIOS7StyleReceipt(): bool
+    protected function isIOS7StyleReceipt()
     {
         return array_key_exists('receipt', $this->raw_data)
             && is_array($this->raw_data['receipt'])
@@ -290,7 +290,7 @@ abstract class AbstractResponse
             && is_array($this->raw_data['receipt']['in_app']);
     }
 
-    protected function isIOS6StyleReceipt(): bool
+    protected function isIOS6StyleReceipt()
     {
         return !$this->isIOS7StyleReceipt() && array_key_exists('receipt', $this->raw_data);
     }
@@ -299,7 +299,7 @@ abstract class AbstractResponse
      * Collect data for iOS >= 7.0 receipt
      * @throws RunTimeException
      */
-    protected function parseIOS7StyleReceipt(): void
+    protected function parseIOS7StyleReceipt()
     {
         $this->receipt = $this->raw_data['receipt'];
         $this->app_item_id = $this->raw_data['receipt']['app_item_id'];
@@ -369,7 +369,7 @@ abstract class AbstractResponse
      * Collect data for iOS <= 6.0 receipt
      * @throws RunTimeException
      */
-    protected function parseIOS6StyleReceipt(): void
+    protected function parseIOS6StyleReceipt()
     {
         $this->receipt = $this->raw_data['receipt'];
         $this->purchases = [];

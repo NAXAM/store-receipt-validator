@@ -106,7 +106,7 @@ class PurchaseItem implements ArrayAccess
      *
      * @throws RunTimeException
      */
-    public function __construct(?array $data = null)
+    public function __construct($data = null)
     {
         $this->raw_data = $data;
         $this->parseData();
@@ -119,7 +119,7 @@ class PurchaseItem implements ArrayAccess
      *
      * @return $this
      */
-    public function parseData(): self
+    public function parseData()
     {
         if (!is_array($this->raw_data)) {
             throw new RuntimeException('Response must be an array');
@@ -192,7 +192,7 @@ class PurchaseItem implements ArrayAccess
     /**
      * @return array|null
      */
-    public function getRawResponse(): ?array
+    public function getRawResponse()
     {
         return $this->raw_data;
     }
@@ -200,7 +200,7 @@ class PurchaseItem implements ArrayAccess
     /**
      * @return int
      */
-    public function getQuantity(): int
+    public function getQuantity()
     {
         return $this->quantity;
     }
@@ -208,7 +208,7 @@ class PurchaseItem implements ArrayAccess
     /**
      * @return bool|null
      */
-    public function isTrialPeriod(): ?bool
+    public function isTrialPeriod()
     {
         return $this->is_trial_period;
     }
@@ -216,7 +216,7 @@ class PurchaseItem implements ArrayAccess
     /**
      * @return bool|null
      */
-    public function isInIntroOfferPeriod(): ?bool
+    public function isInIntroOfferPeriod()
     {
         return $this->is_in_intro_offer_period;
     }
@@ -224,7 +224,7 @@ class PurchaseItem implements ArrayAccess
     /**
      * @return string|null
      */
-    public function getPromotionalOfferId(): ?string
+    public function getPromotionalOfferId()
     {
         return $this->promotional_offer_id;
     }
@@ -232,7 +232,7 @@ class PurchaseItem implements ArrayAccess
     /**
      * @return string
      */
-    public function getProductId(): string
+    public function getProductId()
     {
         return $this->product_id;
     }
@@ -240,7 +240,7 @@ class PurchaseItem implements ArrayAccess
     /**
      * @return null|string
      */
-    public function getWebOrderLineItemId(): ?string
+    public function getWebOrderLineItemId()
     {
         return $this->web_order_line_item_id;
     }
@@ -248,7 +248,7 @@ class PurchaseItem implements ArrayAccess
     /**
      * @return string
      */
-    public function getTransactionId(): string
+    public function getTransactionId()
     {
         return $this->transaction_id;
     }
@@ -256,7 +256,7 @@ class PurchaseItem implements ArrayAccess
     /**
      * @return string
      */
-    public function getOriginalTransactionId(): string
+    public function getOriginalTransactionId()
     {
         return $this->original_transaction_id;
     }
@@ -264,7 +264,7 @@ class PurchaseItem implements ArrayAccess
     /**
      * @return Carbon|null
      */
-    public function getPurchaseDate(): ?Carbon
+    public function getPurchaseDate()
     {
         return $this->purchase_date;
     }
@@ -272,7 +272,7 @@ class PurchaseItem implements ArrayAccess
     /**
      * @return Carbon|null
      */
-    public function getOriginalPurchaseDate(): ?Carbon
+    public function getOriginalPurchaseDate()
     {
         return $this->original_purchase_date;
     }
@@ -280,7 +280,7 @@ class PurchaseItem implements ArrayAccess
     /**
      * @return Carbon|null
      */
-    public function getExpiresDate(): ?Carbon
+    public function getExpiresDate()
     {
         return $this->expires_date;
     }
@@ -288,7 +288,7 @@ class PurchaseItem implements ArrayAccess
     /**
      * @return Carbon|null
      */
-    public function getCancellationDate(): ?Carbon
+    public function getCancellationDate()
     {
         return $this->cancellation_date;
     }

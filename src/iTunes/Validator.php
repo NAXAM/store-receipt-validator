@@ -59,9 +59,13 @@ class Validator
      * @param string $endpoint
      * @throws \InvalidArgumentException
      */
-    public function __construct(string $endpoint = self::ENDPOINT_PRODUCTION)
+    public function __construct($endpoint)
     {
-        if ($endpoint !== self::ENDPOINT_PRODUCTION && $endpoint !== self::ENDPOINT_SANDBOX) {
+        if (!$endpoint) {
+            $endpoint = Validator::ENDPOINT_PRODUCTION;
+        }
+
+        if ($endpoint !== Validator::ENDPOINT_PRODUCTION && $endpoint !== Validator::ENDPOINT_SANDBOX) {
             throw new \InvalidArgumentException("Invalid endpoint '{$endpoint}'");
         }
 
@@ -73,7 +77,7 @@ class Validator
      *
      * @return string|null
      */
-    public function getReceiptData(): ?string
+    public function getReceiptData()
     {
         return $this->receipt_data;
     }
@@ -85,7 +89,7 @@ class Validator
      *
      * @return $this
      */
-    public function setReceiptData($receipt_data): self
+    public function setReceiptData($receipt_data)
     {
         if (strpos($receipt_data, '{') !== false) {
             $this->receipt_data = base64_encode($receipt_data);
@@ -99,7 +103,7 @@ class Validator
     /**
      * @return string|null
      */
-    public function getSharedSecret(): ?string
+    public function getSharedSecret()
     {
         return $this->shared_secret;
     }
@@ -108,7 +112,7 @@ class Validator
      * @param string|null $shared_secret
      * @return $this
      */
-    public function setSharedSecret($shared_secret = null): self
+    public function setSharedSecret($shared_secret = null)
     {
         $this->shared_secret = $shared_secret;
 
@@ -120,7 +124,7 @@ class Validator
      *
      * @return string
      */
-    public function getEndpoint(): string
+    public function getEndpoint()
     {
         return $this->endpoint;
     }
@@ -131,7 +135,7 @@ class Validator
      * @param string $endpoint
      * @return $this
      */
-    public function setEndpoint(string $endpoint): self
+    public function setEndpoint(string $endpoint)
     {
         $this->endpoint = $endpoint;
 
@@ -143,7 +147,7 @@ class Validator
      *
      * @return bool
      */
-    public function getExcludeOldTransactions(): bool
+    public function getExcludeOldTransactions()
     {
         return $this->exclude_old_transactions;
     }
@@ -154,7 +158,7 @@ class Validator
      * @param bool $exclude
      * @return Validator
      */
-    public function setExcludeOldTransactions(bool $exclude): self
+    public function setExcludeOldTransactions(bool $exclude)
     {
         $this->exclude_old_transactions = $exclude;
 
@@ -165,7 +169,7 @@ class Validator
      * Get Client Request Options
      * @return array
      */
-    public function getRequestOptions(): array
+    public function getRequestOptions()
     {
         return $this->request_options;
     }
@@ -175,7 +179,7 @@ class Validator
      * @param array $request_options
      * @return Validator
      */
-    public function setRequestOptions(array $request_options): self
+    public function setRequestOptions(array $request_options)
     {
         $this->request_options = $request_options;
         return $this;
@@ -185,7 +189,7 @@ class Validator
      * Get Guzzle client config
      * @return array
      */
-    protected function getClientConfig(): array
+    protected function getClientConfig()
     {
         $baseUri = ['base_uri' => $this->endpoint];
         $clientConfig = array_merge($this->request_options, $baseUri);
@@ -197,7 +201,7 @@ class Validator
      *
      * @return HttpClient
      */
-    protected function getClient(): HttpClient
+    protected function getClient()
     {
         if ($this->client === null) {
             $this->client = new HttpClient($this->getClientConfig());
@@ -211,7 +215,7 @@ class Validator
      *
      * @return string
      */
-    protected function prepareRequestData(): string
+    protected function prepareRequestData()
     {
         $request = [
             'receipt-data' => $this->getReceiptData(),
@@ -233,7 +237,7 @@ class Validator
      * @throws RunTimeException
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function validate(?string $receipt_data = null, ?string $shared_secret = null): ResponseInterface
+    public function validate($receipt_data, $shared_secret)
     {
         if ($receipt_data !== null) {
             $this->setReceiptData($receipt_data);
